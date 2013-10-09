@@ -1,0 +1,4 @@
+<div>Control: Index</div>
+<div ng-repeat="lecture in lectures | orderBy:'timestamp'">
+		<a href="#/lecture/{{lecture.title}}">{{lecture.title}} {{speakers[lecture.speaker]}}</a>
+</div>

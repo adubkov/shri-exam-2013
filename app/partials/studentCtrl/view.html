@@ -1,0 +1,18 @@
+<div><a ng-click="$back()">Back</a></div>
+
+<div>Control: Index</div>
+<div>LectureID: {{studentId}}</div>
+
+<div>
+	<!--<div ng-repeat="(key, value) in student">{{key}}: {{value}}</div>-->
+    <div>{{student.timestamp}}</div>
+    <div>{{student.first_name}}</div>
+    <div>{{student.last_name}}</div>
+    <div>{{student.city}}</div>
+    <div>{{student.about}}</div>
+    <div ng-show="student.uri_photo"><img src="http://api.imgble.com/{{student.uri_photo}}/0/300" title="{{student.full_name}}" /></div>
+    <div ng-show="student.link_facebook">https://www.facebook.com/{{student.link_facebook}}</div>
+    <div ng-show="student.link_vk">https://vk.com/{{student.link_vk}}</div>
+    <div ng-show="student.link_gihub">https://github.com/{{student.link_gihub}}</div>
+    <div ng-show="student.link_yaru">http://{{student.link_yaru}}.ya.ru/</div>
+</div>

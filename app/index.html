@@ -1,19 +1,23 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="ru" ng-app="shriApp" ng-controller="shriCtrl">
 <head>
   <meta charset="utf-8">
-  <title>My AngularJS App</title>
+  <title>{{title}}</title>
   <link rel="stylesheet" href="css/app.css"/>
+  <style type="text/css">.active {color:red;}</style>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
+  <div>
+    <div>
+      <ul>
+        <li ng-repeat="e in menu">
+          <a href="#{{e.link}}">{{e.caption}}</a>
+        </li>
+      </ul>
+    </div>
 
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
+    <div id="view" ng-view></div>
+  </div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>

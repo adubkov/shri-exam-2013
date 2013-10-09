@@ -1,0 +1,4 @@
+<div>Control: Index</div>
+<div ng-repeat="student in students | orderBy:['last_name','first_name']">
+	<a href="#/student/{{student.last_name}} {{student.first_name}}">{{student.last_name}} {{student.first_name}}</a>
+</div>

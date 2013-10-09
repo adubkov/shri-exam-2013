@@ -1,0 +1,25 @@
+<div><a ng-click="$back()">Back</a></div>
+
+<div>Control: Index</div>
+
+<div>LectureID: {{lectureId}}</div>
+
+<div>
+	<!--<div ng-repeat="(key, value) in lecture">{{key}}: {{value}}</div>-->
+    <div>{{lecture.timestamp}}</div>
+    <div>{{lecture.title}}</div>
+    <div>{{speakers[lecture.speaker]}}</div>
+    <div>http://avatars.yandex.net/get-yaevents/{{lecture.uri_photo}}</div>
+    <div>http://yadi.sk/d/{{lecture.uri_video}}</div>
+    <div>http://yadi.sk/d/{{lecture.uri_presentation}}</div>
+    
+	<object type="application/x-shockwave-flash" id="flash" data="//static.video.yandex.net/custom/" width="750" height="263">
+		<param name="scale" value="scale">
+		<param name="quality" value="high">
+		<param name="bgcolor" value="#000000">
+		<param name="allowfullscreen" value="true">
+		<param name="allowscriptaccess" value="always">
+		<param name="wmode" value="opaque">
+	</object>
+	<iframe class="player" width="750" height="625" frameborder="0" src="http://www.slideshare.net/slideshow/embed_code/{{lecture.link_presentation}}"></iframe>
+</div>
