@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('shriApp', ['shriApp.filters', 'shriApp.services', 'shriApp.directives', 'shriApp.controllers']).
+angular.module('shriApp', ['shriApp.filters', 'shriApp.services', 'shriApp.directives', 'shriApp.controllers', 'ngSanitize']).
   config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/about', {templateUrl: 'partials/shriCtrl/about.html', controller: 'aboutCtrl'});
 

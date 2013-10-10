@@ -1,19 +1,17 @@
-<div><a ng-click="$back()">Back</a></div>
+<div class="back-btn"><a ng-click="$back()">&lt вернуться назад</a></div>
 
-<div>Control: Index</div>
-
-<div>LectureID: {{lectureId}}</div>
+<div><h1>{{lecture.title}}</h1></div>
 
 <div>
 	<!--<div ng-repeat="(key, value) in lecture">{{key}}: {{value}}</div>-->
     <div>{{lecture.timestamp}}</div>
     <div>{{lecture.title}}</div>
-    <div>{{speakers[lecture.speaker]}}</div>
+    <div>{{speakers[lecture.speaker].name}}</div>
     <div>http://avatars.yandex.net/get-yaevents/{{lecture.uri_photo}}</div>
     <div>http://yadi.sk/d/{{lecture.uri_video}}</div>
     <div>http://yadi.sk/d/{{lecture.uri_presentation}}</div>
     
-	<object type="application/x-shockwave-flash" id="flash" data="//static.video.yandex.net/custom/" width="750" height="263">
+	<object ng-show="lecture.link_video" type="application/x-shockwave-flash" id="flash" data="//static.video.yandex.net/custom/" width="750" height="263">
 		<param name="scale" value="scale">
 		<param name="quality" value="high">
 		<param name="bgcolor" value="#000000">
@@ -21,5 +19,6 @@
 		<param name="allowscriptaccess" value="always">
 		<param name="wmode" value="opaque">
 	</object>
-	<iframe class="player" width="750" height="625" frameborder="0" src="http://www.slideshare.net/slideshow/embed_code/{{lecture.link_presentation}}"></iframe>
+	<iframe  ng-show="lecture.link_presentation" class="player" width="750" height="625" frameborder="0" src="http://www.slideshare.net/slideshow/embed_code/{{lecture.link_presentation}}"></iframe>
+	<div class="fb-comments" data-href="https://blacked.github.io/shri-exam-2013/" data-colorscheme="The color scheme used in the plugin" data-numposts="5" data-width="The pixel width of the plugin"></div>	
 </div>

@@ -1,4 +1,10 @@
-<div>Control: Index</div>
-<div ng-repeat="lecture in lectures | orderBy:'timestamp'">
-		<a href="#/lecture/{{lecture.title}}">{{lecture.title}} {{speakers[lecture.speaker]}}</a>
+<div><h1>{{caption}}</h1></div>
+<div class="row">
+	<div ng-repeat="lecture in lectures | orderBy:'timestamp'" class="col-md-6">
+		<a href="#/lecture/{{lecture.title}}">
+			<h3>{{lecture.title}}</h3>
+			{{speakers[lecture.speaker].name}}
+			<div class="photo" style="{{lecture.style_photo}}"></div>
+		</a>
+	</div>
 </div>

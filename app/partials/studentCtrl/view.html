@@ -1,18 +1,29 @@
-<div><a ng-click="$back()">Back</a></div>
-
-<div>Control: Index</div>
-<div>LectureID: {{studentId}}</div>
+<div class="back-btn"><a ng-click="$back()">&lt вернуться назад</a></div>
 
 <div>
-	<!--<div ng-repeat="(key, value) in student">{{key}}: {{value}}</div>-->
-    <div>{{student.timestamp}}</div>
-    <div>{{student.first_name}}</div>
-    <div>{{student.last_name}}</div>
-    <div>{{student.city}}</div>
-    <div>{{student.about}}</div>
-    <div ng-show="student.uri_photo"><img src="http://api.imgble.com/{{student.uri_photo}}/0/300" title="{{student.full_name}}" /></div>
-    <div ng-show="student.link_facebook">https://www.facebook.com/{{student.link_facebook}}</div>
-    <div ng-show="student.link_vk">https://vk.com/{{student.link_vk}}</div>
-    <div ng-show="student.link_gihub">https://github.com/{{student.link_gihub}}</div>
-    <div ng-show="student.link_yaru">http://{{student.link_yaru}}.ya.ru/</div>
+    <div><h1>{{student.full_name}}</h1></div>
+
+    <div class="pull-right" ng-show="student.uri_photo"><img src="https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url={{student.uri_photo}}&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300" title="{{student.full_name}}" /></div>
+    <div>
+        <div class="student-city">
+            <span class="lead">Город:</span>
+            <span class="city">{{student.city}}</span>
+        </div>
+
+        <div class="social-buttons">
+            <span ng-show="student.link_facebook"><a href="https://www.facebook.com/{{student.link_facebook}}" title="{{student.full_name}} на Facebook" target="_blank"><span class="icon-facebook-rect"></span></a></span>
+            <span ng-show="student.link_vk"><a href="https://vk.com/{{student.link_vk}}" title="{{student.full_name}} вКонтакте" target="_blank"><span class="icon-vkontakte-rect"></span></a></span>
+            <span ng-show="student.link_gihub"><a href="https://github.com/{{student.link_gihub}}" title="{{student.full_name}} на github" target="_blank"><span class="icon-github"></span></a></span>
+            <span ng-show="student.link_yaru"><a href="http://{{student.link_yaru}}.ya.ru" title="{{student.full_name}} на ya.ru" target="_blank"><span class="icon-yandex-rect"></span></a></span>
+        </div>
+
+
+        <div>
+            <blockquote>
+              <p ng-bind-html="student.about"></p>
+              <small>{{student.first_name}}</small>
+            </blockquote>            
+        </div>
+
+    </div>
 </div>

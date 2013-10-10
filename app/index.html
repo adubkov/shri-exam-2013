@@ -2,31 +2,132 @@
 <html lang="ru" ng-app="shriApp" ng-controller="shriCtrl">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{title}}</title>
   <link rel="stylesheet" href="css/app.css"/>
-  <style type="text/css">.active {color:red;}</style>
 </head>
 <body>
-  <div>
-    <div>
-      <ul>
-        <li ng-repeat="e in menu">
-          <a href="#{{e.link}}">{{e.caption}}</a>
-        </li>
-      </ul>
-    </div>
+  <nav class="navbar-default navbar-fixed-top" role="navigation">
+    <ul class="nav nav-tabs">
+      <li ng-repeat="(url, obj) in menu">
+        <a href="#{{url}}">{{obj.title}}</a>
+      </li>
+    </ul>
+  </nav>
 
-    <div id="view" ng-view></div>
-  </div>
+  <div ng-view class="container" id="view"></div>
+  <div class="bottom"><span class="pull-right">&copy; <a href="http://dubkov.com/">Dubkov Alexey</a></span></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
   <script src="lib/angular/angular.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+  <script src="lib/angular/angular-sanitize.min.js"></script>
+  <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->  
+  <style type="text/css">
+    .active { color:red; }
+    .photo { height: 300px; width: 300px; background:url('http://placehold.it/300x300') no-repeat left; margin-bottom:10px;  }
+    .student-link { padding-right: 20px; }
+    .student-city { margin-bottom: 10px; }
+    .city { font-size: 16px; }
+    .social-buttons { margin-bottom: 20px; }
+    .social-buttons a, .social-buttons a:hover { text-decoration:  none; }
+    blockquote { padding: 20px 465px 20px 20px; }
+    blockquote p { font-size: 14px; }
+    .back-btn a { cursor: pointer; }
+    .back-btn a:hover { cursor: pointer; text-decoration: none; }
+    .back-btn { margin-top: 20px; }
+    .bottom { padding: 0px 30px; }
+    .container { padding-top: 50px; }
+
+
+    @font-face {
+      font-family: 'brandico';
+      src: url('./fonts/brandico.eot?49362932');
+      src: url('./fonts/brandico.eot?49362932#iefix') format('embedded-opentype'),
+           url('./fonts/brandico.woff?49362932') format('woff'),
+           url('./fonts/brandico.ttf?49362932') format('truetype'),
+           url('./fonts/brandico.svg?49362932#brandico') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+    /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+    /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+    /*
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      @font-face {
+        font-family: 'brandico';
+        src: url('../font/brandico.svg?49362932#brandico') format('svg');
+      }
+    }
+    */
+     
+      [class^="icon-"]:before, [class*=" icon-"]:before {
+        font-family: "brandico";
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        font-size: 26px;
+      }
+
+    .icon-facebook:before { content: '\f300'; } /* '' */
+    .icon-facebook-rect:before { content: '\f301'; } /* '' */
+    .icon-twitter:before { content: '\f302'; } /* '' */
+    .icon-twitter-bird:before { content: '\f303'; } /* '' */
+    .icon-vimeo:before { content: '\f30f'; } /* '' */
+    .icon-vimeo-rect:before { content: '\f30e'; } /* '' */
+    .icon-tumblr:before { content: '\f311'; } /* '' */
+    .icon-tumblr-rect:before { content: '\f310'; } /* '' */
+    .icon-googleplus-rect:before { content: '\f309'; } /* '' */
+    .icon-github-text:before { content: '\f307'; color: black; } /* '' */
+    .icon-github:before { content: '\f308'; color: black; } /* '' */
+    .icon-skype:before { content: '\f30b'; } /* '' */
+    .icon-icq:before { content: '\f304'; } /* '' */
+    .icon-yandex:before { content: '\f305'; color: red; } /* '' */
+    .icon-yandex-rect:before { content: '\f306'; color: red; } /* '' */
+    .icon-vkontakte-rect:before { content: '\f30a'; } /* '' */
+    .icon-odnoklassniki:before { content: '\f30c'; } /* '' */
+    .icon-odnoklassniki-rect:before { content: '\f30d'; } /* '' */
+    .icon-friendfeed:before { content: '\f312'; } /* '' */
+    .icon-friendfeed-rect:before { content: '\f313'; } /* '' */
+    .icon-blogger:before { content: '\f314'; } /* '' */
+    .icon-blogger-rect:before { content: '\f315'; } /* '' */
+    .icon-deviantart:before { content: '\f316'; } /* '' */
+    .icon-jabber:before { content: '\f317'; } /* '' */
+    .icon-lastfm:before { content: '\f318'; } /* '' */
+    .icon-lastfm-rect:before { content: '\f319'; } /* '' */
+    .icon-linkedin:before { content: '\f31a'; } /* '' */
+    .icon-linkedin-rect:before { content: '\f31b'; } /* '' */
+    .icon-picasa:before { content: '\f31c'; } /* '' */
+    .icon-wordpress:before { content: '\f31d'; } /* '' */
+    .icon-instagram:before { content: '\f31e'; } /* '' */
+    .icon-instagram-filled:before { content: '\f31f'; } /* '' */
+    .icon-diigo:before { content: '\f320'; } /* '' */
+    .icon-box:before { content: '\f321'; } /* '' */
+    .icon-box-rect:before { content: '\f322'; } /* '' */
+    .icon-tudou:before { content: '\f323'; } /* '' */
+    .icon-youku:before { content: '\f324'; } /* '' */
+    .icon-win8:before { content: '\f325'; } /* '' */
+
+  </style>   
+
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=214410881948445";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>  
+
 </body>
 </html>

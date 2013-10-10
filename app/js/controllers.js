@@ -8,8 +8,16 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   	rs.menu = data.menu;
   	rs.title = data.title;
   	rs.students = data.students;
-		for (var i = 0, len = rs.data.students.length; i < len; i++) 
-			rs.data.students[i].full_name = rs.data.students[i].last_name + ' ' + rs.data.students[i].first_name;
+  	rs.speakers = data.speakers;
+		for (var i = 0, len = rs.data.students.length; i < len; i++) {
+			var student = rs.data.students[i];
+			rs.data.students[i].full_name = student.last_name + ' ' + student.first_name;
+			rs.data.students[i].style_photo = "background:url('https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=" + student.uri_photo + "&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300') no-repeat left;"
+		}
+		for (var i = 0, len = rs.data.lectures.length; i < len; i++) {
+			rs.data.lectures[i].style_photo = "background:url('https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=http://avatars.yandex.net/get-yaevents/" + rs.data.speakers[rs.data.lectures[i].speaker].uri_photo + "/365x365/&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300') no-repeat left;"
+		}
+
   	rs.lectures = data.lectures;
   	rs.speakers = data.speakers;
   });
@@ -23,8 +31,11 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 	
 }])
 
-.controller('aboutCtrl', ['$scope', function(sc) {
-	sc.title = sc.data.menu[0].caption + ' - ' + sc.data.title;
+.controller('aboutCtrl', ['$scope', '$location', function(sc, lc) {
+	var e = sc.data.menu[lc.path()];
+	sc.title = e.title + ' - ' + sc.data.title;
+	sc.caption = e.caption;
+	sc.content = e.content;
 }])
 
 /*
@@ -32,13 +43,14 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 */
 
 .controller('studentIndexCtrl', ['$scope', '$routeParams', '$location', function(sc, rt, lc) {
-	var title = sc.data.menu[1].caption + ' - ' +	sc.data.title;
+	var title = sc.data.menu[lc.path()].title + ' - ' +	sc.data.title;
 	sc.$emit('setTitle', title);
 
+  sc.caption = sc.data.menu[lc.path()].caption;
   sc.studentId = rt.studentId;
 }])
 
-.controller('studentViewCtrl', ['$scope', '$routeParams', function(sc, rt) {
+.controller('studentViewCtrl', ['$scope', '$routeParams', '$location', function(sc, rt, lc) {
 	sc.studentId = rt.studentId;	
 	sc.student = {};
 
@@ -48,22 +60,22 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 			break;
 		}
 	}
-	var title = sc.student.full_name + ' - ' + sc.data.menu[1].caption + ' - ' +	sc.data.title;	
+	var title = sc.student.full_name + ' - ' +	sc.data.title;	
 	sc.$emit('setTitle', title);	
 }])
 
-.controller('studentAddCtrl', ['$scope', function(sc) {
-	var title = 'Add' + ' - ' + sc.data.menu[1].caption + ' - ' +	sc.data.title;	
+.controller('studentAddCtrl', ['$scope', '$location', function(sc, lc) {
+	var title = 'Add - ' +	sc.data.title;	
 	sc.$emit('setTitle', title);
 }])
 
-.controller('studentUpdateCtrl', ['$scope', function(sc) {
-	var title = 'Update' + ' - ' + sc.data.menu[1].caption + ' - ' +	sc.data.title;	
+.controller('studentUpdateCtrl', ['$scope', '$location', function(sc) {
+	var title = 'Update - ' + sc.data.title;	
 	sc.$emit('setTitle', title);
 }])
 
-.controller('studentDeleteCtrl', ['$scope', function(sc) {
-	var title = 'Delete' + ' - ' + sc.data.menu[1].caption + ' - ' +	sc.data.title;	
+.controller('studentDeleteCtrl', ['$scope', '$location', function(sc) {
+	var title = 'Delete - ' + sc.data.title;	
 	sc.$emit('setTitle', title);
 }])
 
@@ -71,10 +83,11 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 	Lectures object CRUD
 */
 
-.controller('lectureIndexCtrl', ['$scope', '$routeParams', function(sc, rt) {
-	var title = sc.data.menu[2].caption + ' - ' +	sc.data.title;	
+.controller('lectureIndexCtrl', ['$scope', '$routeParams', '$location', function(sc, rt, lc) {
+	var title = sc.data.menu[lc.path()].title + ' - ' +	sc.data.title;	
 	sc.$emit('setTitle', title);
   sc.lectureId = rt.lectureId;
+	sc.caption = sc.data.menu[lc.path()].caption;  
 }])
 
 .controller('lectureViewCtrl', ['$scope', '$routeParams', function(sc, rt) {
@@ -87,24 +100,24 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 			break;
 		}
 	}  
-	var title = sc.lecture.title + ' - ' + sc.data.menu[2].caption + ' - ' +	sc.data.title;	
+	var title = sc.lecture.title + ' - ' +	sc.data.title;	
 	sc.$emit('setTitle', title);
 
 	angular.element(document.querySelector('#flash')).append('<param name="flashvars" value="login=ya-events&amp;storage_directory='+ sc.lecture.link_video +'&amp;autostart=no&amp;tnsCount=0&amp;is-hq=true&amp;has-hq=true&amp;show-info=false&amp;show-quality=true&amp;show-logo=false&amp;is-serp=true">');
 }])
 
 .controller('lectureAddCtrl', ['$scope', function(sc) {
-	var title = 'Add' + ' - ' + sc.data.menu[2].caption + ' - ' +	sc.data.title;	
+	var title = 'Add - ' + sc.data.title;	
 	sc.$emit('setTitle', title);	
 }])
 
 .controller('lectureUpdateCtrl', ['$scope', function(sc) {
-	var title = 'Update' + ' - ' + sc.data.menu[2].caption + ' - ' +	sc.data.title;	
+	var title = 'Update - ' + sc.data.title;	
 	sc.$emit('setTitle', title);	
 }])
 
 .controller('lectureDeleteCtrl', ['$scope', function(sc) {
-	var title = 'Delete' + ' - ' + sc.data.menu[2].caption + ' - ' +	sc.data.title;	
+	var title = 'Delete - ' + sc.data.title;	
 	sc.$emit('setTitle', title);	
 }])
 
