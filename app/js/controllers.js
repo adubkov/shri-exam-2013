@@ -6,42 +6,52 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 	/**
 	* Initialize application
 	**/
-  http.get('data/data.json').success(function(data) {
-  	// Load data from .json and initialize rootScope variables
-  	rs.data = data;
-  	rs.menu = data.menu;
-  	rs.title = data.title;
-  	rs.students = data.students;
-  	rs.speakers = data.speakers;
-  	rs.lectures = data.lectures;
 
-  	// Preload speakers photo
-		for (var i = 0, len = rs.data.lectures.length; i < len; i++) {
-			var img = new Image();
-			img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=http://avatars.yandex.net/get-yaevents/' + rs.data.speakers[rs.data.lectures[i].speaker].uri_photo + '/365x365/&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
-			rs.data.lectures[i].style_photo =  {
-				"background-image":"url('"+img.src+"')",
-				"background-repeat":"no-repeat",
-				"background-position":"left"
+	// Checking that data is fully loaded
+	rs.loaded = false;
+
+  rs.load = function() {
+	  http.get('data/data.json').success(function(data) {
+	  	// Load data from .json and initialize rootScope variables
+	  	rs.data = data;
+	  	rs.menu = data.menu;
+	  	rs.title = data.title;
+	  	rs.students = data.students;
+	  	rs.speakers = data.speakers;
+	  	rs.lectures = data.lectures;
+
+	  	// Preload speakers photo
+			for (var i = 0, len = rs.data.lectures.length; i < len; i++) {
+				var img = new Image();
+				img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=http://avatars.yandex.net/get-yaevents/' + rs.data.speakers[rs.data.lectures[i].speaker].uri_photo + '/365x365/&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
+				rs.data.lectures[i].style_photo =  {
+					"background-image":"url('"+img.src+"')",
+					"background-repeat":"no-repeat",
+					"background-position":"left"
+				}
 			}
-		}
 
-		// Preload students photo and compile Full Name property
-		for (var i = 0, len = rs.data.students.length; i < len; i++) {
-			// compile student.full_name
-			var student = rs.data.students[i];
-			rs.data.students[i].full_name = student.last_name + ' ' + student.first_name;
-			/* Preload photos */
-			var img = new Image();
-			img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=' + student.uri_photo + '&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
-			rs.data.students[i].style_photo = {
-				"background-image":"url('"+img.src+"')",
-				"background-repeat":"no-repeat",
-				"background-position":"left"
+			// Preload students photo and compile Full Name property
+			for (var i = 0, len = rs.data.students.length; i < len; i++) {
+				// compile student.full_name
+				var student = rs.data.students[i];
+				rs.data.students[i].full_name = student.last_name + ' ' + student.first_name;
+				/* Preload photos */
+				var img = new Image();
+				img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=' + student.uri_photo + '&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
+				rs.data.students[i].style_photo = {
+					"background-image":"url('"+img.src+"')",
+					"background-repeat":"no-repeat",
+					"background-position":"left"
+				}
 			}
-		}
 
-  });
+			rs.loaded = true;			
+		});
+	}
+
+	// Is data loaded?
+	if (!rs.loaded) rs.load();
 
 	/**
 	* Declare function $back - step backward in history
@@ -68,6 +78,9 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 *	function aboutCtrl
 **/
 .controller('aboutCtrl', ['$scope', '$location', function(sc, lc) {
+	// Is data loaded?
+	if (!sc.loaded) sc.load();
+
 	// Initialize content
 	var e = sc.data.menu[lc.path()];		
 	sc.caption = e.caption;
@@ -83,6 +96,9 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 *	function studentIndexCtrl
 **/
 .controller('studentIndexCtrl', ['$scope', '$routeParams', '$location', function(sc, rt, lc) {
+	// Is data loaded?
+	if (!sc.loaded) sc.load();
+
 	// Set page title
 	var title = sc.data.menu[lc.path()].title + ' - ' +	sc.data.title;
 	sc.$emit('setPageTitle', title);
@@ -97,6 +113,9 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 *	function studentViewCtrl
 **/
 .controller('studentViewCtrl', ['$scope', '$routeParams', '$location', function(sc, rt, lc) {
+	// Is data loaded?
+	if (!sc.loaded) sc.load();
+
 	// Initialize content
 	sc.studentId = rt.studentId;	
 	sc.student = {};
@@ -123,6 +142,9 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 *	function lectureIndexCtrl
 **/
 .controller('lectureIndexCtrl', ['$scope', '$routeParams', '$location', function(sc, rt, lc) {
+	// Is data loaded?
+	if (!sc.loaded) sc.load();
+
 	// Set page title
 	var title = sc.data.menu[lc.path()].title + ' - ' +	sc.data.title;	
 	sc.$emit('setPageTitle', title);
@@ -141,6 +163,9 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 *	function lectureViewCtrl
 **/
 .controller('lectureViewCtrl', ['$scope', '$routeParams', '$location',  function(sc, rt, lc) {
+	// Is data loaded?
+	if (!sc.loaded) sc.load();
+
 	// Initialize content
   sc.lectureId = rt.lectureId;
   sc.lecture = {};
