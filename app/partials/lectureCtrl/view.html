@@ -4,21 +4,27 @@
 
 <div>
 	<!--<div ng-repeat="(key, value) in lecture">{{key}}: {{value}}</div>-->
-    <div>{{lecture.timestamp}}</div>
-    <div>{{lecture.title}}</div>
-    <div>{{speakers[lecture.speaker].name}}</div>
-    <div>http://avatars.yandex.net/get-yaevents/{{lecture.uri_photo}}</div>
-    <div>http://yadi.sk/d/{{lecture.uri_video}}</div>
-    <div>http://yadi.sk/d/{{lecture.uri_presentation}}</div>
+    <div ng-show="speakers[lecture.speaker].name" style="margin-bottom:20px;" ><span>Лекцию читает: </span><span>{{speakers[lecture.speaker].name}}</span></div>
     
-	<object ng-show="lecture.link_video" type="application/x-shockwave-flash" id="flash" data="//static.video.yandex.net/custom/" width="750" height="263">
-		<param name="scale" value="scale">
-		<param name="quality" value="high">
-		<param name="bgcolor" value="#000000">
-		<param name="allowfullscreen" value="true">
-		<param name="allowscriptaccess" value="always">
-		<param name="wmode" value="opaque">
-	</object>
-	<iframe  ng-show="lecture.link_presentation" class="player" width="750" height="625" frameborder="0" src="http://www.slideshare.net/slideshow/embed_code/{{lecture.link_presentation}}"></iframe>
-	<div class="fb-comments" data-href="https://blacked.github.io/shri-exam-2013/" data-colorscheme="The color scheme used in the plugin" data-numposts="5" data-width="The pixel width of the plugin"></div>	
+    <div ng-show="speakers[lecture.speaker].uri_photo" class="photo pull-left" ng-style="lecture.style_photo">
+	    <ul class="nav nav-pills" style="margin-top:320px;">
+	    	<li><a ng-show="lecture.uri_video" href="http://yadi.sk/d/{{lecture.uri_video}}">Скачать видео лекции <span class="badge">{{lecture.uri_video_size}}</span></a></li>
+	    	<li><a ng-show="lecture.uri_presentation" href="http://yadi.sk/d/{{lecture.uri_presentation}}">Скачать презентацию</a></li>
+		</ul>
+    </div>
+
+    <div class="text-center pull-right">
+    	<div ng-show="lecture.link_video"  class="video-block">
+    		<div class="title">Видео лекции:</div>
+    		<div class="video">
+				<object ng-bind-html-unsafe="video_param" type="application/x-shockwave-flash" id="flash" data="//static.video.yandex.net/custom/" width="750" height="263"></object>
+			</div>
+		</div>
+		<div ng-show="lecture.link_presentation" class="presentation-block">
+			<div class="title">Презентация лекции:</div>
+			<div class="presentation">
+				<iframe class="player" width="750" height="625" frameborder="0" src="http://www.slideshare.net/slideshow/embed_code/{{lecture.link_presentation}}"></iframe>
+			</div>
+		</div>
+	</div>
 </div>

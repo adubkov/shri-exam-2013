@@ -3,7 +3,7 @@
 <div>
     <div><h1>{{student.full_name}}</h1></div>
 
-    <div class="pull-right" ng-show="student.uri_photo"><img src="https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url={{student.uri_photo}}&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300" title="{{student.full_name}}" /></div>
+    <div class="photo pull-right" ng-show="student.uri_photo" ng-style="student.style_photo" ><!--<img src="https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url={{student.uri_photo}}&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300" title="{{student.full_name}}" />--></div>
     <div>
         <div class="student-city">
             <span class="lead">Город:</span>
