@@ -74,19 +74,14 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-    if (sc.data !== undefined) {
-      console.log(sc.data);
-      console.log(lc.path());
+    // Initialize content
+    var e = sc.data.menu[lc.path()];    
+    sc.caption = e.caption;
+    sc.content = e.content;
 
-      // Initialize content
-      var e = sc.data.menu[lc.path()];    
-      sc.caption = e.caption;
-      sc.content = e.content;
-
-      // Set page title 
-      sc.title = sc.data.title;
-      sc.$emit('setPageTitle', sc.title);
-    }
+    // Set page title 
+    sc.title = sc.data.title;
+    sc.$emit('setPageTitle', sc.title);
   }
   updateView();
 
