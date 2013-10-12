@@ -100,7 +100,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-      if (sc.data !== undefined) {
+    if (sc.data !== undefined) {
       // Set page title
       var title = sc.data.menu[lc.path()].title + ' - ' + sc.data.title;
       sc.$emit('setPageTitle', title);
@@ -125,7 +125,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-      if (sc.data !== undefined) {
+    if (sc.data !== undefined) {
       // Initialize content
       sc.studentId = rt.studentId;  
       sc.student = {};
@@ -158,7 +158,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-      if (sc.data !== undefined) {
+    if (sc.data !== undefined) {
       // Set page title
       var title = sc.data.menu[lc.path()].title + ' - ' + sc.data.title;  
       sc.$emit('setPageTitle', title);
@@ -183,6 +183,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
     var updateView = function(){
+    if (sc.data !== undefined) {
       // Initialize content
       sc.lectureId = rt.lectureId;
       sc.lecture = {};
