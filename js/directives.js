@@ -12,7 +12,7 @@ angular.module('shriApp.directives', []).
 
   .directive('yPlayer', ['', function() {
     return {
-    	
+      
     };
   }])
 

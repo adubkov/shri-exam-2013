@@ -6,11 +6,11 @@ angular.module('shriApp', ['shriApp.filters', 'shriApp.services', 'shriApp.direc
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/about', {templateUrl: 'partials/shriCtrl/about.html', controller: 'aboutCtrl'});
 
-  	$routeProvider.when('/students', {templateUrl: 'partials/studentCtrl/index.html', controller: 'studentIndexCtrl'});
-  	$routeProvider.when('/student/:studentId', {templateUrl: 'partials/studentCtrl/view.html', controller: 'studentViewCtrl'});
+    $routeProvider.when('/students', {templateUrl: 'partials/studentCtrl/index.html', controller: 'studentIndexCtrl'});
+    $routeProvider.when('/student/:studentId', {templateUrl: 'partials/studentCtrl/view.html', controller: 'studentViewCtrl'});
 
-  	$routeProvider.when('/lectures', {templateUrl: 'partials/lectureCtrl/index.html', controller: 'lectureIndexCtrl'});
-  	$routeProvider.when('/lecture/:lectureId', {templateUrl: 'partials/lectureCtrl/view.html', controller: 'lectureViewCtrl'});
+    $routeProvider.when('/lectures', {templateUrl: 'partials/lectureCtrl/index.html', controller: 'lectureIndexCtrl'});
+    $routeProvider.when('/lecture/:lectureId', {templateUrl: 'partials/lectureCtrl/view.html', controller: 'lectureViewCtrl'});
 
     $routeProvider.otherwise({redirectTo: '/about'});
   }]);
