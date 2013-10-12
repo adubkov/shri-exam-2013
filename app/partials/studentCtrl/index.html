@@ -1,9 +1,9 @@
 <div><h1>{{caption}}</h1></div>
 <div class="row">
-	<div ng-repeat="student in students | orderBy:['last_name','first_name']" class="col-md-4">
-		<a href="#/student/{{student.full_name}}" class="student-link">
-		<div><h4>{{student.full_name}}</h4></div>
-			<div class="photo" ng-style="student.style_photo"></div>
-		</a>
-	</div>
+  <div ng-repeat="student in students | orderBy:['last_name','first_name']" class="col-md-4">
+    <a href="#/student/{{student.full_name}}" class="student-link">
+    <div><h4>{{student.full_name}}</h4></div>
+      <div class="photo" ng-style="student.style_photo"></div>
+    </a>
+  </div>
 </div>
