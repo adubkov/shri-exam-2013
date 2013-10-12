@@ -74,19 +74,21 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-    // Initialize content
-    var e = sc.data.menu[lc.path()];    
-    sc.caption = e.caption;
-    sc.content = e.content;
+    if (sc.data !== undefined) {
+      // Initialize content
+      var e = sc.data.menu[lc.path()];    
+      sc.caption = e.caption;
+      sc.content = e.content;
 
-    // Set page title 
-    sc.title = sc.data.title;
-    sc.$emit('setPageTitle', sc.title);
+      // Set page title 
+      sc.title = sc.data.title;
+      sc.$emit('setPageTitle', sc.title);
+    }
   }
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -98,18 +100,20 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-    // Set page title
-    var title = sc.data.menu[lc.path()].title + ' - ' + sc.data.title;
-    sc.$emit('setPageTitle', title);
-    
-    // Initialize content
-    sc.caption = sc.data.menu[lc.path()].caption;
-    sc.studentId = rt.studentId;
+      if (sc.data !== undefined) {
+      // Set page title
+      var title = sc.data.menu[lc.path()].title + ' - ' + sc.data.title;
+      sc.$emit('setPageTitle', title);
+      
+      // Initialize content
+      sc.caption = sc.data.menu[lc.path()].caption;
+      sc.studentId = rt.studentId;
+    }
   }
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -121,26 +125,28 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-    // Initialize content
-    sc.studentId = rt.studentId;  
-    sc.student = {};
+      if (sc.data !== undefined) {
+      // Initialize content
+      sc.studentId = rt.studentId;  
+      sc.student = {};
 
-    // Find student object by full_name
-    for (var i = 0, len = sc.data.students.length; i < len; i++) {
-      if (sc.studentId == sc.data.students[i].full_name) {
-        sc.student = sc.data.students[i];
-        break;
+      // Find student object by full_name
+      for (var i = 0, len = sc.data.students.length; i < len; i++) {
+        if (sc.studentId == sc.data.students[i].full_name) {
+          sc.student = sc.data.students[i];
+          break;
+        }
       }
-    }
 
-    // Set page title
-    var title = sc.student.full_name + ' - ' +  sc.data.title;  
-    sc.$emit('setPageTitle', title);  
+      // Set page title
+      var title = sc.student.full_name + ' - ' +  sc.data.title;  
+      sc.$emit('setPageTitle', title);  
+    }
   }
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -152,18 +158,20 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   * Update View function
   **/
   var updateView = function(){
-    // Set page title
-    var title = sc.data.menu[lc.path()].title + ' - ' + sc.data.title;  
-    sc.$emit('setPageTitle', title);
+      if (sc.data !== undefined) {
+      // Set page title
+      var title = sc.data.menu[lc.path()].title + ' - ' + sc.data.title;  
+      sc.$emit('setPageTitle', title);
 
-    // Initialize content
-    sc.caption = sc.data.menu[lc.path()].caption;  
-    sc.lectureId = rt.lectureId;
+      // Initialize content
+      sc.caption = sc.data.menu[lc.path()].caption;  
+      sc.lectureId = rt.lectureId;
+    }
   }
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -174,30 +182,31 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   /**
   * Update View function
   **/
-  var updateView = function(){
-    // Initialize content
-    sc.lectureId = rt.lectureId;
-    sc.lecture = {};
-    sc.path = lc.path();  
+    var updateView = function(){
+      // Initialize content
+      sc.lectureId = rt.lectureId;
+      sc.lecture = {};
+      sc.path = lc.path();  
 
-    // Get lecture object by lectureId
-    for (var i = 0, len = sc.data.lectures.length; i < len; i++) {
-      var lecture = sc.data.lectures[i].title;
-      if (lecture == sc.lectureId) {
-        sc.lecture = sc.data.lectures[i];
-        break;
-      }
-    } 
+      // Get lecture object by lectureId
+      for (var i = 0, len = sc.data.lectures.length; i < len; i++) {
+        var lecture = sc.data.lectures[i].title;
+        if (lecture == sc.lectureId) {
+          sc.lecture = sc.data.lectures[i];
+          break;
+        }
+      } 
 
-    // Set page title
-    var title = sc.lecture.title + ' - ' +  sc.data.title;  
-    sc.$emit('setPageTitle', title);
+      // Set page title
+      var title = sc.lecture.title + ' - ' +  sc.data.title;  
+      sc.$emit('setPageTitle', title);
 
-    // Compile video object
-    sc.video_param = '<param name="scale" value="scale"><param name="quality" value="high"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="wmode" value="opaque"><param name="flashvars" value="login=ya-events&amp;storage_directory='+ sc.lecture.link_video +'&amp;autostart=no&amp;tnsCount=0&amp;is-hq=true&amp;has-hq=true&amp;show-info=false&amp;show-quality=true&amp;show-logo=false&amp;is-serp=true">';
+      // Compile video object
+      sc.video_param = '<param name="scale" value="scale"><param name="quality" value="high"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="wmode" value="opaque"><param name="flashvars" value="login=ya-events&amp;storage_directory='+ sc.lecture.link_video +'&amp;autostart=no&amp;tnsCount=0&amp;is-hq=true&amp;has-hq=true&amp;show-info=false&amp;show-quality=true&amp;show-logo=false&amp;is-serp=true">';
+    }
   }
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }]);
