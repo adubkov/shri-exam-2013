@@ -75,6 +75,9 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   **/
   var updateView = function(){
     if (sc.data !== undefined) {
+      console.log(sc.data);
+      console.log(lc.path());
+
       // Initialize content
       var e = sc.data.menu[lc.path()];    
       sc.caption = e.caption;
