@@ -45,7 +45,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 					"background-position":"left"
 				}
 			}
-
+			
 			rs.loaded = true;			
 		});
 	}
@@ -81,8 +81,9 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
 	// Is data loaded?
 	if (!sc.loaded) sc.load();
 
+	var path = lc.path()
 	// Initialize content
-	var e = sc.data.menu[lc.path()];		
+	var e = sc.data.menu[path?path:'/about'];		
 	sc.caption = e.caption;
 	sc.content = e.content;
 
