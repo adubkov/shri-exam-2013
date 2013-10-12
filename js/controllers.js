@@ -86,7 +86,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -109,7 +109,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -140,7 +140,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -163,7 +163,7 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }])
 
 
@@ -199,5 +199,5 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
   updateView();
 
   // Do updateView when data.json is fully load
-  sc.$on('dataIsLoaded', updateView());
+  sc.$on('dataIsLoaded', updateView);
 }]);
