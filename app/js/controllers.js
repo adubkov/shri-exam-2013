@@ -32,6 +32,10 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
       // compile student.full_name
       var student = rs.data.students[i];
       rs.data.students[i].full_name = student.last_name + ' ' + student.first_name;
+
+      // Replace \n by <br />
+      rs.data.students[i].about = rs.data.students[i].about.replace(/\n/g,'<br />');
+
       /* Preload photos */
       var img = new Image();
       img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url='
@@ -80,7 +84,6 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
       // Initialize content
       var e = sc.data.menu[lc.path()];    
       sc.caption = e.caption;
-      sc.content = e.content;
 
       // Set page title 
       sc.title = sc.data.title;
