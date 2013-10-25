@@ -18,7 +18,8 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
     // Preload speakers photo
     for (var i = 0, len = rs.data.lectures.length; i < len; i++) {
       var img = new Image();
-      img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=http://avatars.yandex.net/get-yaevents/' + rs.data.speakers[rs.data.lectures[i].speaker].uri_photo + '/365x365/&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
+      img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=http://avatars.yandex.net/get-yaevents/'
+       + rs.data.speakers[rs.data.lectures[i].speaker].uri_photo + '/365x365/&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
       rs.data.lectures[i].style_photo =  {
         "background-image":"url('"+img.src+"')",
         "background-repeat":"no-repeat",
@@ -33,7 +34,8 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
       rs.data.students[i].full_name = student.last_name + ' ' + student.first_name;
       /* Preload photos */
       var img = new Image();
-      img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url=' + student.uri_photo + '&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
+      img.src = 'https://i.embed.ly/1/display/resize?key=4f59029f4cd24722a3e3f7c399f665bd&url='
+       + student.uri_photo + '&height=300&errorUrl=http%3A%2F%2Fplacehold.it%2F300x300';
       rs.data.students[i].style_photo = {
         "background-image":"url('"+img.src+"')",
         "background-repeat":"no-repeat",
@@ -203,7 +205,17 @@ angular.module('shriApp.controllers', []).run(['$rootScope', '$http', function(r
       sc.$emit('setPageTitle', title);
 
       // Compile video object
-      sc.video_param = '<param name="scale" value="scale"><param name="quality" value="high"><param name="bgcolor" value="#FFFFFF"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="always"><param name="wmode" value="opaque"><param name="flashvars" value="login=ya-events&amp;storage_directory='+ sc.lecture.link_video +'&amp;autostart=no&amp;tnsCount=0&amp;is-hq=true&amp;has-hq=true&amp;show-info=false&amp;show-quality=true&amp;show-logo=false&amp;is-serp=true">';
+      sc.video_param = 
+        '<param name="scale" value="scale">\
+        <param name="quality" value="high">\
+        <param name="bgcolor" value="#FFFFFF">\
+        <param name="allowfullscreen" value="true">\
+        <param name="allowscriptaccess" value="always">\
+        <param name="wmode" value="opaque">\
+        <param name="flashvars" value="login=ya-events&amp;storage_directory='
+        + sc.lecture.link_video
+        + '&amp;autostart=no&amp;tnsCount=0&amp;is-hq=true&amp;has-hq=true&amp;\
+        show-info=false&amp;show-quality=true&amp;show-logo=false&amp;is-serp=true">';      
     }
   }
   updateView();
