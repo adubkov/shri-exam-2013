@@ -32,6 +32,6 @@ angular.module('shriApp', ['shriApp.filters', 'shriApp.services', 'shriApp.direc
     $routeProvider.otherwise({redirectTo: '/about'});
 
     // configure html5 to get links working without #
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
     
   }]);
