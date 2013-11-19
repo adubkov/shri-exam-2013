@@ -2,7 +2,7 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('shriApp', ['shriApp.filters', 'shriApp.services', 'shriApp.directives', 'shriApp.controllers', 'ngSanitize']).
-  config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  config(['$routeProvider', function($routeProvider) {
 
     $routeProvider.when('/about', {
       templateUrl: 'partials/shriCtrl/about.html',
@@ -30,8 +30,5 @@ angular.module('shriApp', ['shriApp.filters', 'shriApp.services', 'shriApp.direc
     });
 
     $routeProvider.otherwise({redirectTo: '/about'});
-
-    // configure html5 to get links working without #
-    //$locationProvider.html5Mode(true);
     
   }]);
