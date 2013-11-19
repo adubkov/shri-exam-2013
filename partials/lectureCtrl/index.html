@@ -1,11 +1,11 @@
 <div><h1>{{caption}}</h1></div>
 <div class="row">
   <div ng-repeat="lecture in lectures | orderBy:'timestamp'" class="col-md-6">
-    <a href="#/lecture/{{lecture.title}}">
+    <a href="/lecture/{{lecture.title}}">
       <h3>{{lecture.title}}</h3>
     </a>
     <span>{{speakers[lecture.speaker].name}}</span>
-    <a href="#/lecture/{{lecture.title}}">
+    <a href="/lecture/{{lecture.title}}">
       <div class="photo" ng-style="lecture.style_photo"></div>
     </a>
   </div>
